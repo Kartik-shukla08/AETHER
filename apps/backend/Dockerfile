@@ -8,6 +8,9 @@ COPY package.json package-lock.json tsconfig.json ./
 # Copy package manifests for workspace packages needed
 COPY packages/llm-sdk/package.json ./packages/llm-sdk/
 COPY apps/backend/package.json ./apps/backend/
+COPY apps/frontend/package.json ./apps/frontend/
+COPY apps/ingestion/package.json ./apps/ingestion/
+COPY apps/worker/package.json ./apps/worker/
 
 # Install dependencies (cached unless package.json files change)
 RUN npm ci

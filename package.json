@@ -1,0 +1,32 @@
+{
+  "name": "llm-inference-logging-system",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev:backend": "npm run dev --workspace=@llm-logging/backend",
+    "dev:frontend": "npm run dev --workspace=@llm-logging/frontend",
+    "dev:worker": "npm run dev --workspace=@llm-logging/worker",
+    "dev:ingestion": "npm run dev --workspace=@llm-logging/ingestion",
+    "db:migrate": "npx prisma migrate dev",
+    "db:generate": "npx prisma generate",
+    "db:studio": "npx prisma studio"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/ws": "^8.18.1",
+    "bullmq": "^5.80.8",
+    "ioredis": "^5.11.1",
+    "prisma": "^5.10.2",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "ws": "^8.21.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0"
+  }
+}

@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
+}
+
+model Conversation {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  messages  Message[]
+  logs      InferenceLog[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String       @map("conversation_id")
+  role           String       // "user", "assistant", "system"
+  content        String
+  provider       String?      // "openai", "gemini", "groq", etc.
+  createdAt      DateTime     @default(now()) @map("created_at")
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model InferenceLog {
+  id              String       @id @default(uuid())
+  conversationId  String       @map("conversation_id")
+  provider        String       // "openai", "gemini", "groq", etc.
+  model           String
+  latencyMs       Int          @map("latency_ms")
+  ttftMs          Int          @map("ttft_ms")
+  inputTokens     Int          @map("input_tokens")
+  outputTokens    Int          @map("output_tokens")
+  totalTokens     Int          @map("total_tokens")
+  requestPreview  String       @map("request_preview")
+  responsePreview String       @map("response_preview")
+  status          String       // "success", "error"
+  errorMessage    String?      @map("error_message")
+  createdAt       DateTime     @default(now()) @map("created_at")
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@map("inference_logs")
+}

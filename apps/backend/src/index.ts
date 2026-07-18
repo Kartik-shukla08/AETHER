@@ -21,6 +21,11 @@ server.register(cors, {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 });
 
+// Root check endpoint
+server.get('/', async () => {
+  return { status: 'ok', service: 'backend-api' };
+});
+
 // Health check endpoint
 server.get('/health', async () => {
   try {

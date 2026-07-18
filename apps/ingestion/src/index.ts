@@ -163,6 +163,11 @@ server.register(async (fastifyInstance) => {
   });
 });
 
+// Root check endpoint
+server.get('/', async () => {
+  return { status: 'ok', service: 'ingestion-api' };
+});
+
 // REST: Health Check
 server.get('/health', async () => {
   try {

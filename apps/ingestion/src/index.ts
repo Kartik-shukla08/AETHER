@@ -246,7 +246,7 @@ server.get('/metrics', async (request, reply) => {
 
 const start = async () => {
   try {
-    const port = parseInt(process.env.PORT_INGESTION || process.env.PORT || '4010', 10);
+    const port = parseInt(process.env.PORT || process.env.PORT_INGESTION || '4010', 10);
     const host = process.env.HOST || '0.0.0.0';
 
     await prisma.$connect();

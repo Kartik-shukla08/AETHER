@@ -35,10 +35,10 @@ WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
 COPY prisma ./prisma/
 COPY packages/llm-sdk/package.json ./packages/llm-sdk/
-COPY --from=builder /app/packages/llm-sdk/dist ./packages/llm-sdk/dist/
 COPY apps/backend/package.json ./apps/backend/
-COPY --from=builder /app/apps/backend/dist ./apps/backend/dist/
 COPY --from=builder /app/node_modules ./node_modules/
+COPY --from=builder /app/packages/llm-sdk/dist ./packages/llm-sdk/dist/
+COPY --from=builder /app/apps/backend/dist ./apps/backend/dist/
 
 EXPOSE 4000
 ENV PORT=4000

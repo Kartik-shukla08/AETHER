@@ -29,8 +29,8 @@ WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
 COPY prisma ./prisma/
 COPY apps/ingestion/package.json ./apps/ingestion/
-COPY --from=builder /app/apps/ingestion/dist ./apps/ingestion/dist/
 COPY --from=builder /app/node_modules ./node_modules/
+COPY --from=builder /app/apps/ingestion/dist ./apps/ingestion/dist/
 
 EXPOSE 4010
 ENV PORT_INGESTION=4010

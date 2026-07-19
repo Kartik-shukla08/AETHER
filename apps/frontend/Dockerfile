@@ -31,9 +31,9 @@ WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
 COPY apps/frontend/package.json ./apps/frontend/
 COPY apps/frontend/next.config.ts ./apps/frontend/
+COPY --from=builder /app/node_modules ./node_modules/
 COPY --from=builder /app/apps/frontend/.next ./apps/frontend/.next/
 COPY --from=builder /app/apps/frontend/public ./apps/frontend/public/
-COPY --from=builder /app/node_modules ./node_modules/
 
 EXPOSE 3000
 ENV PORT=3000

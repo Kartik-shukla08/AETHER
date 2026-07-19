@@ -22,8 +22,8 @@ WORKDIR /app
 
 COPY package.json package-lock.json tsconfig.json ./
 COPY apps/worker/package.json ./apps/worker/
-COPY --from=builder /app/apps/worker/dist ./apps/worker/dist/
 COPY --from=builder /app/node_modules ./node_modules/
+COPY --from=builder /app/apps/worker/dist ./apps/worker/dist/
 
 ENV NODE_ENV=production
 
